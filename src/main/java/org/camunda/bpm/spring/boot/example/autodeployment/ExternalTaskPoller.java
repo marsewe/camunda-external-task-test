@@ -29,7 +29,8 @@ public class ExternalTaskPoller {
 
     protected ExternalTaskPoller() {
 
-        this.noQueueExecutorService = new ThreadPoolExecutor(15, 15, 0, TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(100));
+        this.noQueueExecutorService = new ThreadPoolExecutor(15, 15, 10000,
+                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.CallerRunsPolicy());
     }
 
     @Scheduled(

@@ -14,10 +14,15 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import javax.sql.DataSource;
+
 @SpringBootApplication
 @EnableProcessApplication
 @EnableScheduling
 public class AutoDeploymentApplication {
+
+    @Autowired
+    private DataSource dataSource;
 
     public static void main(String[] args) {
         SpringApplication.run(AutoDeploymentApplication.class, args);

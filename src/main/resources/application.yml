@@ -1,0 +1,17 @@
+camunda:
+  bpm:
+    history-level: NONE
+
+logging:
+  file: application.log
+  level:
+    org.camunda.bpm.engine.impl: INFO
+    org.camunda.bpm.spring.boot.example.autodeployment: TRACE
+
+spring:
+  datasources:
+    primary:
+      driverClassName: com.p6spy.engine.spy.P6SpyDriver
+      url: jdbc:p6spy:postgresql://localhost/test_camunda_db
+      username: dev
+      password: dev
