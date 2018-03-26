@@ -47,7 +47,7 @@ public class ExternalTaskPoller {
 
     public void executeTask(LockedExternalTask externalTask) throws Exception {
         log.info("Hello task {}", externalTask.getId());
-        Thread.sleep(10); // do some work
+        Thread.sleep(300); // do some work
     }
 
 
