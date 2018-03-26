@@ -15,12 +15,9 @@ public class DatasourceConfig {
 
     @Bean(name="camundaBpmDataSource")
     @ConfigurationProperties(prefix="spring.datasources.primary")
-    public DataSource secondaryDataSource() {
+    public DataSource primaryDataSource() {
         return DataSourceBuilder.create().build();
     }
 
-    @Bean
-    public NamedParameterJdbcTemplate namedParameterJdbcTemplate(DataSource primaryDataSource) {
-        return new NamedParameterJdbcTemplate(primaryDataSource);
-    }
+
 }
