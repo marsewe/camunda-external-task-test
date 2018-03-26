@@ -30,14 +30,14 @@ public class ExternalTaskPoller {
     protected ExternalTaskPoller() {
 
         this.noQueueExecutorService = new ThreadPoolExecutor(15, 15, 10000,
-                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(100), new ThreadPoolExecutor.CallerRunsPolicy());
+                TimeUnit.MILLISECONDS, new ArrayBlockingQueue<>(1000), new ThreadPoolExecutor.CallerRunsPolicy());
     }
 
     @Scheduled(
             fixedRate = 100
     )
     public void poll() {
-        List<LockedExternalTask> tasks = externalTaskService.fetchAndLock(10, UUID.randomUUID().toString())
+        List<LockedExternalTask> tasks = externalTaskService.fetchAndLock(50, UUID.randomUUID().toString())
                 .topic(topicName, 600000)
                 .execute();
 
