@@ -1,6 +1,8 @@
 camunda:
   bpm:
     history-level: NONE
+    job-execution:
+      core-pool-size: 10
 
 logging:
   file: application.log

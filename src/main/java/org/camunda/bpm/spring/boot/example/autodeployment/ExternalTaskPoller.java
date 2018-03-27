@@ -34,12 +34,13 @@ public class ExternalTaskPoller {
     }
 
     @Scheduled(
-            fixedRate = 100
+            fixedRate = 1000
     )
     public void poll() {
         List<LockedExternalTask> tasks = externalTaskService.fetchAndLock(50, UUID.randomUUID().toString())
                 .topic(topicName, 600000)
                 .execute();
+        log.info("Got {} tasks", tasks.size());
 
         tasks.forEach(externalTask -> noQueueExecutorService.execute(() -> process(externalTask)));
     }

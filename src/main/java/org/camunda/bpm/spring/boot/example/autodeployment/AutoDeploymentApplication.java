@@ -2,6 +2,7 @@ package org.camunda.bpm.spring.boot.example.autodeployment;
 
 import org.camunda.bpm.engine.RepositoryService;
 import org.camunda.bpm.engine.delegate.JavaDelegate;
+import org.camunda.bpm.engine.impl.cfg.ProcessEnginePlugin;
 import org.camunda.bpm.engine.repository.ProcessDefinition;
 import org.camunda.bpm.spring.boot.starter.annotation.EnableProcessApplication;
 import org.camunda.bpm.spring.boot.starter.event.PostDeployEvent;
@@ -12,7 +13,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.EventListener;
+import org.springframework.core.task.TaskExecutor;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
 import javax.sql.DataSource;
 
@@ -29,6 +32,11 @@ public class AutoDeploymentApplication {
 
     @Autowired
     private RepositoryService repositoryService;
+
+    @Bean
+    public ProcessEnginePlugin processDefinitionCustomPluginConfiguration() {
+        return new ProcessDefinitionCustomPluginConfiguration();
+    }
 
     @Bean
     public JavaDelegate sayHelloDelegate() {
